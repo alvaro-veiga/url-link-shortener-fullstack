@@ -128,6 +128,5 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ## 📫 Contato
 
-Seu Nome - [@seu_twitter](https://twitter.com/seu_twitter) - email@exemplo.com
 
-Link do Projeto: [https://github.com/seu-usuario/url-link-shortener-fullstack](https://github.com/seu-usuario/url-link-shortener-fullstack)
+Link do Projeto: [https://github.com/alvaro-veiga/url-link-shortener-fullstack](https://github.com/alvaro-veiga/url-link-shortener-fullstack)
