@@ -117,15 +117,6 @@ O projeto utiliza Material-UI para uma interface moderna e responsiva, com:
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-## ✨ Recursos Futuros
-
-- [ ] Autenticação de usuários
-- [ ] URLs personalizadas
-- [ ] Dashboard de estatísticas avançado
-- [ ] Exportação de dados
-- [ ] Suporte a QR Code
-- [ ] Temas personalizáveis
-
 ## 📫 Contato
 
 
