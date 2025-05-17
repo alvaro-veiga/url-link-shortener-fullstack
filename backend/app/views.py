@@ -1,46 +1,36 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import redirect, get_object_or_404
+from rest_framework import viewsets, status
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 from .models import ShortenedURL
-import json
+from .serializers import ShortenedURLSerializer
 
-@csrf_exempt
-def shorten_url(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            original_url = data.get('url')
-            
-            if not original_url:
-                return JsonResponse({'error': 'URL is required'}, status=400)
-            
-            shortened_url = ShortenedURL.objects.create(original_url=original_url)
-            
-            return JsonResponse({
-                'original_url': shortened_url.original_url,
-                'short_code': shortened_url.short_code,
-                'short_url': f"{request.scheme}://{request.get_host()}/{shortened_url.short_code}"
-            })
-        except json.JSONDecodeError:
-            return JsonResponse({'error': 'Invalid JSON'}, status=400)
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
-    
-    return JsonResponse({'error': 'Method not allowed'}, status=405)
+class ShortenedURLViewSet(viewsets.ModelViewSet):
+    queryset = ShortenedURL.objects.all()
+    serializer_class = ShortenedURLSerializer
+    permission_classes = [AllowAny]
 
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def redirect_to_original(request, short_code):
     shortened_url = get_object_or_404(ShortenedURL, short_code=short_code)
     shortened_url.clicks += 1
     shortened_url.save()
     return redirect(shortened_url.original_url)
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def get_url_stats(request, short_code):
     shortened_url = get_object_or_404(ShortenedURL, short_code=short_code)
-    return JsonResponse({
-        'original_url': shortened_url.original_url,
-        'short_code': shortened_url.short_code,
-        'clicks': shortened_url.clicks,
-        'created_at': shortened_url.created_at
-    })
+    serializer = ShortenedURLSerializer(shortened_url, context={'request': request})
+    return Response(serializer.data)
 
 
