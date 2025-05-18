@@ -117,17 +117,7 @@ O projeto utiliza Material-UI para uma interface moderna e responsiva, com:
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-## ✨ Recursos Futuros
-
-- [ ] Autenticação de usuários
-- [ ] URLs personalizadas
-- [ ] Dashboard de estatísticas avançado
-- [ ] Exportação de dados
-- [ ] Suporte a QR Code
-- [ ] Temas personalizáveis
-
 ## 📫 Contato
 
-Seu Nome - [@seu_twitter](https://twitter.com/seu_twitter) - email@exemplo.com
 
-Link do Projeto: [https://github.com/seu-usuario/url-link-shortener-fullstack](https://github.com/seu-usuario/url-link-shortener-fullstack)
+Link do Projeto: [https://github.com/alvaro-veiga/url-link-shortener-fullstack](https://github.com/alvaro-veiga/url-link-shortener-fullstack)
